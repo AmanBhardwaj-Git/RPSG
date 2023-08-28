@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RockPaperScissor-Game by AmanBhardwaj</title>
+  <meta name="author" content="Aman Bhardwaj">
+  <link rel="icon" type="image/x-icon" href="imagesRpsg/logoRPSG.png">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      background-color: rgb(40, 40, 38);
+      height: 100%;
+    }
+
+    #heading {
+      width: 100%;
+      text-align: center;
+      font-size: 30px;
+      font-weight: 600;
+      color: rgb(226, 204, 175);
+      text-shadow: 5px 5px 10px rgb(132, 84, 21);
+
+      margin: 30px 0px 30px 0px;
+    }
+
+    #option {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      margin: 50px;
+      padding-left: 20px;
+
+    }
+
+    #paper_div,
+    #rock_div,
+    #scissor_div {
+
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      height: 150px;
+      width: 150px;
+      border: 3px solid black;
+      border-radius: 50%;
+      border: 4px solid rgb(186, 192, 143);
+      box-shadow: inset 2px 2px 5px rgb(0, 0, 0);
+    }
+
+    #option button {
+      cursor: pointer;
+      top: 10px;
+      border-radius: 50%;
+      height: 100%;
+      width: 100%;
+      z-index: 2;
+      opacity: 0;
+    }
+
+    img {
+      position: absolute;
+      filter: drop-shadow(1px 1px 6px rgb(237, 252, 182));
+      rotate: 90deg;
+      width:90px;
+
+    }
+
+    #paper_div img {
+      rotate: 270deg;
+      transform: scaleY(-1);
+    }
+
+    #details {
+      width: 100%;
+      text-align: center;
+      font-size: 30px;
+      font-weight: 500;
+      color: rgb(244, 229, 154);
+      text-shadow: 6px 6px 5px rgb(41, 192, 7);
+
+      margin: 30px 0px 30px 0px;
+    }
+
+    #id-reset {
+      width: 30%;
+      margin-left: 35%;
+      height: 35px;
+      color: rgb(234, 234, 66);
+      border: 4px solid green;
+      box-shadow: inset 2px 2px 5px greenyellow;
+      background-color: rgb(14, 75, 55);
+      text-align: center;
+      cursor: pointer;
+    }
+
+    #reset-Dialog {
+      color: crimson;
+      text-shadow: 2px 2px 1px rgb(20, 20, 20);
+      margin: 10px 0px 0px 0px;
+      font-size: 20px;
+      font-weight: 600;
+      width: 100%;
+      text-align: center;
+    }
+    @media (max-width:430px) {
+  #option{
+      justify-content: space-around;
+   
+  }
+  #details{
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+  }
+  img{
+    width:70px;
+  }
+  
+  #paper_div,
+    #rock_div,
+    #scissor_div {
+      height: 100px;
+      width: 100px;
+    }
+    #id-reset {
+      width: 200px;
+      height: 70px;
+      margin-left: 27%;
+      font-size: 30px;
+      text-shadow: 1px 1px 2px rgb(24, 18, 9);
+    }
+  
+}
+
+  </style>
+</head>
+
+<body>
+  <p id="heading">Rock - Paper - Scissor</p>
+  <div id="option">
+    <div id="rock_div">
+      <img src="imagesRpsg/rockSign.png"
+        alt="rock" >
+      <button id="id-rock" onclick="checkRock()"> Rock</button>
+    </div>
+
+    <div id="paper_div">
+      <img src="imagesRpsg/paperSign.png" alt="paper" >
+      <button id="id-paper" onclick="checkPaper()"> paper</button>
+    </div>
+
+    <div id="scissor_div">
+      <img
+        src="imagesRpsg/scissorSign.png"
+        alt="scissor" >
+      <button id="id-scissor" onclick="checkScissor()"> scissor</button>
+    </div>
+
+  </div>
+
+
+  <p id="details">Won : <span id=win-rateid>0</span> --- Lose : <span id=lose-rateid>0</span> --- Tie : <span
+      id=tie-rateid>0</span> </p>
+  <button id="id-reset" onclick="resetFunc()"> Reset</button>
+  <p id='reset-Dialog'></p>
+  
+  <script>
+
+    let winVar = document.getElementById('win-rateid');
+    let loseVar = document.getElementById('lose-rateid');
+    let tieVar = document.getElementById('tie-rateid');
+    let computerChoice = '';
+
+    function checkRock() {
+      let result = ''
+      checkRandom();
+      console.log('rock called')
+      if (computerChoice === 'rock') {
+        result = 'Game Tie';
+        tieVar.textContent++;
+      }
+      else if (computerChoice === 'scissor') {
+        result = 'Congrats you Won';
+        winVar.textContent++;
+      }
+      else if (computerChoice === 'paper') {
+        result = 'Sorry you lose';
+        loseVar.textContent++;
+      }
+
+      alert(`computer choice is  ${computerChoice} your choice is Rock : ${result}`)
+    }
+
+
+    function checkPaper() {
+      checkRandom();
+      console.log('paper called')
+      if (computerChoice === 'paper') {
+        result = 'Game Tie';
+        tieVar.textContent++;
+      }
+      else if (computerChoice === 'rock') {
+        result = 'Congrats you Won';
+        winVar.textContent++;
+      }
+      else if (computerChoice === 'scissor') {
+        result = 'Sorry you lose';
+        loseVar.textContent++;
+      }
+
+      alert(`computer choice is  ${computerChoice} your choice is Paper : ${result}`)
+    }
+
+    function checkScissor() {
+      checkRandom();
+      console.log('scissor called')
+      if (computerChoice === 'scissor') {
+        result = 'Game Tie';
+        tieVar.textContent++;
+      }
+      else if (computerChoice === 'paper') {
+        result = 'Congrats you Won';
+        winVar.textContent++;
+      }
+      else if (computerChoice === 'rock') {
+        result = 'Sorry you lose';
+        loseVar.textContent++;
+      }
+
+      alert(`computer choice is  ${computerChoice} your choice is Scissor : ${result}`)
+
+    }
+
+
+    function checkRandom() {
+      const computerVal = Math.random();
+
+      if (computerVal >= 0 && computerVal < 1 / 3) {
+        computerChoice = 'rock';
+
+      }
+      else if (computerVal >= 1 / 3 && computerVal < 2 / 3) {
+        computerChoice = 'paper';
+
+      }
+      else if (computerVal >= 2 / 3 && computerVal < 3 / 3) {
+        computerChoice = 'scissor';
+
+      }
+      document.getElementById('reset-Dialog').textContent = ''
+    }
+
+
+    function resetFunc() {
+      winVar.textContent = 0;
+      loseVar.textContent = 0;
+      tieVar.textContent = 0
+      document.getElementById('reset-Dialog').textContent = 'Game Reseted'
+    }
+
+
+//  `
+  </script>
+</body>
+
+</html>
